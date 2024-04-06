@@ -7,15 +7,16 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
  
-
 let userSelectedDate;
-const startBtn = document.querySelector(`.data-start`);
+let currentDate = new Date();
+
+const startBtn = document.querySelector(`[data-start]`);
 
 const elements = {
     days: document.querySelector(`.data-days`),
     hours: document.querySelector(`.data-hours`),
     minutes: document.querySelector(`.data-minutes`),
-    seconds: document.querySelector(`data-seconds`)
+    seconds: document.querySelector(`.data-seconds`)
 };
 
 const options = {
@@ -34,11 +35,10 @@ const options = {
       }
       else {
           startBtn.disabled = false;
+         
       }
     },
 };
-  
-  let currentDate = new Date();
 
 flatpickr('#datetime-picker', options);
 iziToast.error({ title: "Alert", message: "Please choose a date in the future" });
@@ -49,7 +49,7 @@ startBtn.addEventListener ("click", () => {
     let timerDistance = userSelectedDate - currentDay;
     if (timerDistance <= 0) {
         clearInterval(timerInterval);
-        document.getElementById("timer").innerText = "00:00:00:00";
+        document.querySelector(".timer").innerText = "00:00:00:00";
     }
     else {
         const second = 1000;
@@ -57,11 +57,11 @@ startBtn.addEventListener ("click", () => {
         const hour = minute * 60;
         const day = hour * 24;
         let days = Math.floor(timerDistance / day);
-        let hours = Math.floor((timerDistance % day) / hour);
-        let minutes = Math.floor(((timerDistance % day) % hour) / minute);
-        let seconds = Math.floor((((timerDistance % day) % hour) % minute) / second);
+        let hours = Math.floor((timerDistance % (day)) / (hour));
+        let minutes = Math.floor(((timerDistance % (day)) % hour) / (minute));
+        let seconds = Math.floor((((timerDistance % (day)) % hour) % minute) / (second));
 
-        document.getElementById("timer").innerText = `${ days.toString().padStart(2, "0") }:${ hours.toString().padStart(2, "0") }:${ minutes.toString().padStart(2, "0") }:${ seconds.toString().padStart(2, "0") }`;
+        document.querySelector(".timer").innerText = `${ days.toString().padStart(2, "0") }:${ hours.toString().padStart(2, "0") }:${ minutes.toString().padStart(2, "0") }:${ seconds.toString().padStart(2, "0") }`;
     }
     }, 1000);
 });
