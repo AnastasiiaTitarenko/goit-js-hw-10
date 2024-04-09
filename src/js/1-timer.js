@@ -7,10 +7,11 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
  
-let userSelectedDate;
+let userSelectedDate = null;
 let currentDate = new Date();
 
 const startBtn = document.querySelector(`[data-start]`);
+startBtn.disabled = true;
 
 const elements = {
     days: document.querySelector(`.data-days`),
@@ -44,13 +45,19 @@ const options = {
 flatpickr('#datetime-picker', options);
 iziToast.error({ title: "Alert", message: "Please choose a date in the future" });
 
-startBtn.addEventListener ("click", () => {
+
+startBtn.addEventListener("click", () => {
+    let timerElement = document.querySelector(".timer");
+    if (userSelectedDate === null) {
+        return;
+    }
     let timerInterval = setInterval(() => {
-        let currentDay = new Date().getTime();
+    let currentDay = new Date().getTime();
     let timerDistance = userSelectedDate - currentDay;
+        
     if (timerDistance <= 0) {
         clearInterval(timerInterval);
-        document.querySelector(".timer").innerText = "00:00:00:00";
+        timerElement.innerText = "00:00:00:00";
     }
     else {
         const second = 1000;
@@ -62,7 +69,12 @@ startBtn.addEventListener ("click", () => {
         let minutes = Math.floor(((timerDistance % (day)) % hour) / (minute));
         let seconds = Math.floor((((timerDistance % (day)) % hour) % minute) / (second));
 
-        document.querySelector(".timer").innerText = `${ days.toString().padStart(2, "0") }:${ hours.toString().padStart(2, "0") }:${ minutes.toString().padStart(2, "0") }:${ seconds.toString().padStart(2, "0") }`;
+        elements.days.innerText = days.toString().padStart(2, "0");
+        elements.hours.innerText = hours.toString().padStart(2, "0");
+        elements.minutes.innerText = minutes.toString().padStart(2, "0");
+        elements.seconds.innerText = seconds.toString().padStart(2, "0");
+
+        // timerElement.innerText = `${ days.toString().padStart(2, "0") }:${ hours.toString().padStart(2, "0") }:${ minutes.toString().padStart(2, "0") }:${ seconds.toString().padStart(2, "0") }`;
     }
     }, 1000);
 });
