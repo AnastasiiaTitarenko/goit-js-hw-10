@@ -14,10 +14,10 @@ const startBtn = document.querySelector(`[data-start]`);
 startBtn.disabled = true;
 
 const elements = {
-    days: document.querySelector(`.data-days`),
-    hours: document.querySelector(`.data-hours`),
-    minutes: document.querySelector(`.data-minutes`),
-    seconds: document.querySelector(`.data-seconds`)
+    days: document.querySelector(`[data-days]`),
+    hours: document.querySelector(`[data-hours]`),
+    minutes: document.querySelector(`[data-minutes]`),
+    seconds: document.querySelector(`[data-seconds]`)
 };
 
 const options = {
@@ -69,12 +69,12 @@ startBtn.addEventListener("click", () => {
         let minutes = Math.floor(((timerDistance % (day)) % hour) / (minute));
         let seconds = Math.floor((((timerDistance % (day)) % hour) % minute) / (second));
 
-        elements.days.innerText = days.toString().padStart(2, "0");
-        elements.hours.innerText = hours.toString().padStart(2, "0");
-        elements.minutes.innerText = minutes.toString().padStart(2, "0");
-        elements.seconds.innerText = seconds.toString().padStart(2, "0");
+        // elements.days.textContent = days.toString().padStart(2, "0");
+        // elements.hours.textContent = hours.toString().padStart(2, "0");
+        // elements.minutes.textContent = minutes.toString().padStart(2, "0");
+        // elements.seconds.textContent = seconds.toString().padStart(2, "0");
 
-        // timerElement.innerText = `${ days.toString().padStart(2, "0") }:${ hours.toString().padStart(2, "0") }:${ minutes.toString().padStart(2, "0") }:${ seconds.toString().padStart(2, "0") }`;
+        timerElement.textContent = `${ days.toString().padStart(2, "0") }:${ hours.toString().padStart(2, "0") }:${ minutes.toString().padStart(2, "0") }:${ seconds.toString().padStart(2, "0") }`;
     }
     }, 1000);
 });
