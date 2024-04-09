@@ -69,12 +69,12 @@ startBtn.addEventListener("click", () => {
         let minutes = Math.floor(((timerDistance % (day)) % hour) / (minute));
         let seconds = Math.floor((((timerDistance % (day)) % hour) % minute) / (second));
 
-        // elements.days.textContent = days.toString().padStart(2, "0");
-        // elements.hours.textContent = hours.toString().padStart(2, "0");
-        // elements.minutes.textContent = minutes.toString().padStart(2, "0");
-        // elements.seconds.textContent = seconds.toString().padStart(2, "0");
+        elements.days.textContent = days.toString().padStart(2, "0");
+        elements.hours.textContent = hours.toString().padStart(2, "0");
+        elements.minutes.textContent = minutes.toString().padStart(2, "0");
+        elements.seconds.textContent = seconds.toString().padStart(2, "0");
 
-        timerElement.textContent = `${ days.toString().padStart(2, "0") }:${ hours.toString().padStart(2, "0") }:${ minutes.toString().padStart(2, "0") }:${ seconds.toString().padStart(2, "0") }`;
+        // timerElement.textContent = `${ days.toString().padStart(2, "0") }:${ hours.toString().padStart(2, "0") }:${ minutes.toString().padStart(2, "0") }:${ seconds.toString().padStart(2, "0") }`;
     }
     }, 1000);
 });
